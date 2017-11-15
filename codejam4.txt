@@ -1,0 +1,139 @@
+ EngineersPrimes 
+ 
+     A prime number is a number whose only divisors are 1 and itself. A sublinear polynomial-time algorithm has been shown to exist that   nd so on. Note that 1 is not considered a prime in this case.
+Given an int N, your method should return the smallest Engineer's Prime of order N that is not prime. 
+  
+Definition 
+Method signature: long SmallestNonPrime(int N) 
+  
+Notes 
+- 1 is not to be considered prime. 
+  
+Constraints 
+- N will be between 1 and 100000, inclusive. 
+  
+Examples 
+1) 3
+Returns: 49 
+The first three primes are 2, 3, and 5. Next, look through the numbers after 5 that are not divisible by any of those first three primes. These are, in order, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, and 49, all of which are prime except the last. 
+  
+2)  1
+Returns: 9 
+The first odd number that is not prime. 
+  
+3)  265
+Returns: 2886601 
+ 
+4)  1835
+Returns: 247716121
+ 
+4)  10000
+Returns: 10971096049
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Collections;
+using System.Text.RegularExpressions;
+using System.Text;
+
+namespace CodeJam
+{
+    public class EngineersPrimes
+    {
+        int[] arr = new int[50];
+
+        long SmallestNonPrime(int n)
+        { 
+
+            int flag = 0,k=0;
+            for (int i = 2; i <= n; i++)
+            {
+
+                for (int j = 2; j <= i; j++)
+                {
+                    if (i % j == 0)
+                    {
+                        flag = 1;
+                        break;
+                    }
+                    else
+                    {
+
+                        arr[k] = i;
+                        k++;
+                    }
+
+
+                    if (flag == 0)
+                    {
+                        for (int m = 0; m < arr.Length; m++)
+                        {
+                            Console.WriteLine(arr[m]);
+                        }
+
+                    }
+
+                }
+            }
+            return Int64.MinValue;
+        }
+            #region Testing code Do not change
+            public static void Main(String[] args)
+            {
+                EngineersPrimes engineersPrimes = new EngineersPrimes();
+                String input = Console.ReadLine();
+                do
+                {
+                    Console.WriteLine(engineersPrimes.SmallestNonPrime(Int32.Parse(input)));
+                    input = Console.ReadLine();
+                } while (input != "-1");
+            }
+            #endregion
+        
+    }
+}

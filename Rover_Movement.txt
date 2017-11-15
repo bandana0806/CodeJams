@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mars_Rover
+{
+    public class Rover__Movement
+    {
+        public Rover__Movement(RoverMovementData roverMovementData)
+        {
+            this.RoverData = roverMovementData;
+            this.positionBreadth = roverMovementData.PositionBreadth;
+            this.positionLength = roverMovementData.PositionLength;
+        }
+
+        private RoverMovementData RoverData { get; set; }
+
+        private Direction currentDirection = new North();
+
+        private int positionLength;
+        private int positionBreadth;
+
+        public void Turn_Right()
+        {
+            this.currentDirection = currentDirection.GetDirectionOnRight();
+            
+            
+        }
+
+        public void Turn_Left()
+        {
+           this.currentDirection = currentDirection.GetDirectionOnLeft();
+        }
+
+
+        public void Move_Forward()
+        {
+            switch (currentDirection.GetName().ToLowerInvariant())
+            {
+                case "north":
+                    if (this.positionBreadth < this.RoverData.Breadth)
+                        this.positionBreadth += 1;
+                    break;
+                case "south":
+                    if (this.positionBreadth > 0 && this.positionBreadth > this.RoverData.Breadth)
+                        this.positionBreadth -= 1;
+                    break;
+                case "east":
+                    if (this.positionLength < this.RoverData.Length)
+                        this.positionLength += 1;
+                    break;
+                case "west":
+                    if (this.positionLength > 0 && this.positionLength < this.RoverData.Length)
+                        this.positionLength -= 1;
+                    break;
+            }
+        }
+
+
+        public void Move_backward()
+        {
+            switch (currentDirection.GetName().ToLowerInvariant())
+            {
+                case "north":
+                    if (this.positionBreadth > 0 && this.positionBreadth > this.RoverData.Breadth)
+                        this.positionBreadth -= 1;
+                    break;
+                case "south":
+                    if (this.positionBreadth < this.RoverData.Breadth)
+                        this.positionBreadth += 1;
+                    break;
+                case "east":
+                    if (this.positionLength > 0 && this.positionLength > this.RoverData.Length)
+                        this.positionLength -= 1;
+                    break;
+                case "west":
+                    if (this.positionLength < this.RoverData.Length)
+                        this.positionLength += 1;
+                    break;
+            }
+
+        }
+
+        public string GetCurrentDirection()
+        {
+            return currentDirection.GetName();
+        }
+
+        public int GetCurrentBreadthPosition()
+        {
+            return positionBreadth;
+        }
+
+        public int GetCurrentLengthPosition()
+        {
+            return positionLength;
+        }
+    }
+
+    public class RoverMovementData
+    {
+        public int Length { get; set; }
+
+        public int Breadth { get; set; }
+
+        public int PositionLength { get; set; }
+
+        public int PositionBreadth { get; set; }
+    }
+
+    public class 
+}

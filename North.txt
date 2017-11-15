@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mars_Rover
+{
+    public abstract class Direction
+    {
+        public abstract Direction GetDirectionOnLeft();
+
+        public abstract Direction GetDirectionOnRight();
+
+        public abstract string GetName();
+    }
+
+
+    public class North : Direction
+    {
+        public override Direction GetDirectionOnLeft()
+        {
+            return new West();
+        }
+
+        public override Direction GetDirectionOnRight()
+        {
+            return new East();
+        }
+
+        public override string GetName()
+        {
+            return "North";
+        }
+    }
+
+    public class South : Direction
+    {
+        public override Direction GetDirectionOnLeft()
+        {
+            return new East();
+        }
+
+        public override Direction GetDirectionOnRight()
+        {
+            return new West();
+        }
+        public override string GetName()
+        {
+            return "South";
+        }
+    }
+
+    public class East : Direction
+    {
+        public override Direction GetDirectionOnLeft()
+        {
+            return new North();
+        }
+
+        public override Direction GetDirectionOnRight()
+        {
+            return new South();
+        }
+
+        public override string GetName()
+        {
+            return "East";
+        }
+    }
+
+    public class West : Direction
+    {
+        public override Direction GetDirectionOnLeft()
+        {
+            return new South();
+        }
+
+        public override Direction GetDirectionOnRight()
+        {
+            return new North();
+        }
+
+        public override string GetName()
+        {
+            return "West";
+        }
+    }
+}

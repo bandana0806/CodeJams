@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Mars_Rover
+{
+    public class Rover_Alignment
+    {
+        public void Movement_Align(int movement_length, int movement_breadth)
+        {
+
+            Console.WriteLine(" enter the movement position you want to hAVe in your robo");
+
+            if (int.TryParse(Console.ReadLine(), out movement_length) == true)
+            { }
+
+            if (int.TryParse(Console.ReadLine(), out movement_breadth) == true)
+            { }
+
+        }
+
+        public void Boundary(int boundary_length, int boundary_breadth)
+        {
+            Console.WriteLine("enter the boundary length of the rectangle");
+            if (int.TryParse(Console.ReadLine(), out boundary_length) == true)
+            { }
+            Console.WriteLine("enter the boundary breadth of the rectangle");
+            if (int.TryParse(Console.ReadLine(), out boundary_length) == true)
+            { }
+
+        }
+
+        void Rover_Display(int position_length, int position_breadth)
+        {
+            Console.WriteLine("Position of Rover");
+            Console.WriteLine("["+ position_length +","+ position_breadth+ "]");
+        }   
+    }
+}

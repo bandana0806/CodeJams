@@ -1,0 +1,131 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Mars_Rover;
+
+namespace Rover_test
+{
+    [TestClass]
+    public class UnitTest1
+    {
+
+        //[TestMethod]
+        //public void test_for_turning_right()
+        //{
+
+        //    Rover__Movement rover_movement_test = new Rover__Movement();
+
+        //    Assert.AreEqual(4, rover_movement_test.Turn_Right(6, 2, 2));
+        //}
+
+        //[TestMethod]
+        //public void test_for_turning_left()
+
+        //{ 
+        //  Rover__Movement rover_movement_test = new Rover__Movement();
+        //  Assert.AreEqual(2, rover_movement_test.Turn_Left(6, 3, 1));
+
+        //}
+        //[TestMethod]
+        //public void test_for_turning_forward()
+
+        //{
+        //    Rover__Movement rover_movement_test = new Rover__Movement();
+        //    Assert.AreEqual(4, rover_movement_test.Turn_Forward(6, 2, 2));
+
+        //}
+        //[TestMethod]
+        //public void test_for_turning_backward()
+        //{
+        //    Rover__Movement rover_movement_test = new Rover__Movement();
+        //    Assert.AreEqual(2, rover_movement_test.Turn_backward(6, 3, 1));
+        //}
+
+        [TestMethod]
+        public void Test_Rover_Movement()
+        {
+            var roverData = new RoverMovementData();
+            roverData.Length = 10;
+            roverData.Breadth = 15;
+            roverData.PositionLength = 5;
+            roverData.PositionBreadth = 5;
+
+            var roverMovement = new Rover__Movement(roverData);
+            roverMovement.Turn_Left();
+            roverMovement.Move_Forward();
+            roverMovement.Move_Forward();
+            roverMovement.Turn_Left();
+            roverMovement.Turn_Left();
+            roverMovement.Move_backward();
+
+            Assert.AreEqual(2, roverMovement.GetCurrentLengthPosition());
+
+        }
+
+        [TestMethod]
+        public void Test_Rover_Movement_Beyond_Boundary()
+        {
+            var roverData = new RoverMovementData();
+            roverData.Length = 10;
+            roverData.Breadth = 15;
+            roverData.PositionLength = 0;
+            roverData.PositionBreadth = 0;
+
+            var roverMovement = new Rover__Movement(roverData);
+            roverMovement.Turn_Left();
+            roverMovement.Move_Forward();
+            roverMovement.Move_Forward();
+            roverMovement.Turn_Left();
+            roverMovement.Turn_Left();
+            roverMovement.Move_backward();
+
+            Assert.AreEqual(0, roverMovement.GetCurrentLengthPosition());
+
+        }
+
+        [TestMethod]
+        public void Test_Rover_Movement_Near_Boundary()
+        {
+            var roverData = new RoverMovementData();
+            roverData.Length = 10;
+            roverData.Breadth = 15;
+            roverData.PositionLength = 1;
+            roverData.PositionBreadth = 1;
+
+            var roverMovement = new Rover__Movement(roverData);
+            roverMovement.Turn_Left();
+            roverMovement.Move_Forward();
+            roverMovement.Move_Forward();
+            roverMovement.Turn_Left();
+            roverMovement.Turn_Left();
+            roverMovement.Move_backward();
+
+            Assert.AreEqual(0, roverMovement.GetCurrentLengthPosition());
+
+
+
+        }
+
+        [TestMethod]
+        public void Test_Rover_Orientation()
+        {
+            var roverData = new RoverMovementData();
+            roverData.Length = 10;
+            roverData.Breadth = 15;
+            roverData.PositionLength = 1;
+            roverData.PositionBreadth = 1;
+
+            var roverMovement = new Rover__Movement(roverData);
+            roverMovement.Turn_Left();
+            roverMovement.Move_Forward();
+            roverMovement.Move_Forward();
+            roverMovement.Turn_Left();
+            roverMovement.Turn_Left();
+            roverMovement.Move_backward();
+
+            Assert.AreEqual("East", roverMovement.GetCurrentDirection());
+
+
+
+        }
+    }
+} 

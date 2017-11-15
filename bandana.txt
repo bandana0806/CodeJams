@@ -1,0 +1,189 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Text.RegularExpressions;
+//using System.Guid;
+
+namespace Directory_Codejam
+{
+    class Directory
+    {
+        static void Main(string[] args)
+        { 
+
+
+                Input input = new Input();
+                Student_Folder student_folder = new Student_Folder();
+                DirectoryInfo directory = new DirectoryInfo(@"d:\mydir_codejam");
+            try
+            {
+                if (directory.Exists)
+                {
+                    Console.WriteLine("directory already exists");
+                }
+                else
+                {
+                    directory.Create();
+                    Console.WriteLine("directory created successfully");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("processing failed", e.ToString());
+            }
+
+            string path = @"d:\mydir_codejam\Student.txt";
+            
+            if (!File.Exists(path))
+
+            {
+                FileStream fs=File.Create(path);
+                fs.Close();
+                input.enter_name();
+
+                //File.WriteAllText(path, input.student_folder.first_name);
+                //[] buffer=Encoding.ASCII.GetBytes(input.student_folder.first_name);
+                //fs.Write(buffer, buffer.Length, 0);
+                input.Address();
+                //input.DOB();
+                input.Mentor_name();
+                input.email();
+                input.phone_number();
+                fs.Close();
+                //File.WriteAllText(path, input.student_folder.ToString());
+                //TextWriter tw = new StreamWriter(path);
+                //tw.WriteLine("The very first line!");
+                //tw.Close();
+            }
+            else if (File.Exists(path))
+            {
+                input.enter_name();
+                input.Address();
+                //713Kinput.DOB();
+                input.Mentor_name();
+                input.email();
+                input.phone_number();
+                File.WriteAllText(path, student_folder.ToString());
+                //TextWriter tw = new StreamWriter(path);
+                //.WriteLine("The next line!");
+                //tw.Close();
+            }
+
+
+            //File.WriteAllText(path, student_folder.ToString());
+            Console.ReadKey(true);
+        }
+    }
+
+
+    public class Student_Folder
+    {
+        public override string ToString()
+        {
+            string result=string.Empty;
+            result += this.first_name;
+            result += this.last_name;
+            result += this.phone_number;
+            result += this.address;
+            result += this.email;
+            //result += this.DOB;
+            result += this.mentor_name;
+            return result;
+        }
+        public string phone_number { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string address { get; set; }
+        public string email { get; set; }
+        //public DateTime DOB { get; set; }
+        public string mentor_name { get; set; }
+        void Id()
+        {
+            Guid messageId = System.Guid.NewGuid();
+        }
+
+
+    }
+    public class Input
+    {
+        public Student_Folder student_folder = new Student_Folder();
+        Validation validation = new Validation();
+        
+        public void phone_number()
+        {
+
+            Console.WriteLine("enter your phone number");
+            string phone_number = Console.ReadLine();
+           // if (validation.Validation_phone_number(phone_number))
+            //    { student_folder.phone_number = phone_number; }
+            
+        }
+        public void enter_name()
+        {
+
+            Console.WriteLine(" enter your first name");
+            student_folder.first_name = Console.ReadLine();
+            Console.WriteLine(" enter your last name");
+            student_folder.last_name = Console.ReadLine();
+        }
+        public void email()
+        {
+            Console.WriteLine("enter your email ID");
+            string email = Console.ReadLine();
+            //validation.Validation_email(email);
+            student_folder.email = email;
+        }
+        public void Address()
+        {
+            Console.WriteLine("Enter Address");
+            student_folder.address = Console.ReadLine();
+        }
+        /*public void DOB()
+        {
+            Console.WriteLine(" enter your Date if birth");
+            student_folder.DOB = DateTime.Parse(Console.ReadLine());
+        }*/
+        public void Mentor_name()
+        {
+            Console.WriteLine("	Current Course perusing");
+            student_folder.mentor_name = Console.ReadLine();
+        }
+
+
+    }
+    public class Validation
+    {
+       /* public bool Validation_phone_number(string phone_number)
+        {
+            if (Regex.Match(phone_number, @"^(\+[0-9])$").Success)
+            {
+                Console.WriteLine("correctly entered");
+                return true;
+            }
+
+            else
+            {
+                Console.WriteLine("incorrectly entered");
+                return false;
+            }
+        }*/
+
+        public bool Validation_email(string email)
+        {
+            string email_add = Console.ReadLine();
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email_add);
+                return addr.Address == email_add;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
+}
+    
